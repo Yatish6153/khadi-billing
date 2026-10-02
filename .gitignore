@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.next/
+out/
+coverage/
+
+.env
+.env.local
+.env.*.local
+
+*.log
+.DS_Store
+Thumbs.db
+
+# Uploaded files and generated backups (Phases 4, 7, 8)
+backend/uploads/
+backend/backups/
+
+# TypeScript build cache
+*.tsbuildinfo

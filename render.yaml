@@ -1,0 +1,27 @@
+# Render Blueprint for the backend API (Express + Prisma).
+# Render → New → Blueprint → pick this GitHub repo. The frontend is deployed on Vercel.
+services:
+  - type: web
+    name: khadi-billing-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: singapore # closest Render region to India
+    # Dev dependencies (TypeScript, Prisma CLI) are needed to build
+    buildCommand: npm ci --include=dev && npm run build
+    # Apply any new database migrations, then start the server
+    startCommand: npx prisma migrate deploy && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_HOURS
+        value: '12'
+      - key: JWT_SECRET
+        generateValue: true
+      # Supabase connection string (Session pooler, port 5432) — paste in Render
+      - key: DATABASE_URL
+        sync: false
+      # The Vercel address, e.g. https://devesh-khadi.vercel.app — paste in Render
+      - key: FRONTEND_URL
+        sync: false

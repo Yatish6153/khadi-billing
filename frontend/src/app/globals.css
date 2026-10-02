@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens: white / light-gray surfaces with a Khadi-green accent. */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 145 63% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 142 52% 94%;
+    --accent-foreground: 145 63% 22%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 88%;
+    --ring: 145 63% 32%;
+    --radius: 0.6rem;
+
+    --sidebar: 220 20% 98%;
+    --sidebar-foreground: 220 9% 30%;
+    --sidebar-active: 142 52% 92%;
+    --sidebar-active-foreground: 145 63% 24%;
+
+    /* Page background behind cards */
+    --canvas: 220 16% 97%;
+
+    /* Charts: single-series colour, validated (dataviz) against light/dark surfaces */
+    --chart-1: #1e8449;
+    --chart-grid: 220 13% 91%;
+
+    /* Status colours (always paired with a text label) */
+    --success: 145 63% 32%;
+    --warning: 32 95% 44%;
+  }
+
+  .dark {
+    --background: 222 22% 9%;
+    --foreground: 210 20% 96%;
+    --card: 222 20% 12%;
+    --card-foreground: 210 20% 96%;
+    --popover: 222 20% 12%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 145 55% 45%;
+    --primary-foreground: 150 40% 8%;
+    --secondary: 220 16% 18%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 16% 18%;
+    --muted-foreground: 220 10% 65%;
+    --accent: 145 30% 18%;
+    --accent-foreground: 145 55% 75%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 20%;
+    --input: 220 14% 24%;
+    --ring: 145 55% 45%;
+
+    --sidebar: 222 22% 11%;
+    --sidebar-foreground: 220 10% 72%;
+    --sidebar-active: 145 30% 18%;
+    --sidebar-active-foreground: 145 55% 75%;
+
+    --canvas: 222 22% 8%;
+
+    --chart-1: #2a9d5a;
+    --chart-grid: 220 14% 18%;
+
+    --success: 145 55% 45%;
+    --warning: 38 92% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Printing a bill: A4, only the bill, grey cells kept */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  /* A4 is 297mm; minus the 8mm top/bottom margins leaves 281mm. Stay under it so
+     a normal bill never spills onto a blank second page. */
+  .bill-sheet {
+    min-height: 274mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  [data-sonner-toaster] {
+    display: none !important;
+  }
+}
+
+@layer utilities {
+  .bg-canvas {
+    background-color: hsl(var(--canvas));
+  }
+}
